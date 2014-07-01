@@ -19,12 +19,6 @@ Objetivos :
     * Instalador.
     * Distribución GNU/Linux instalada en el equipo internamente.
 
- - Contar con un repositorio local de Debian testing. ¿Posiblemente "congelado"?
-   ¿Y actualizado cada 6 meses o un año?. Con lo lindo que es instalar software
-   nuevo este objetivo parece desalentador, pero ¿Cómo mantener un repo
-   "estable" estando en Debian testing? ¿Para evitar que estaciones de trabajo
-   diferentes tengan versiones diferentes de software?
-
 
 ¿Por qué Debian Testing?
 ------------------------
@@ -35,6 +29,16 @@ Objetivos :
   versión.
 * Tendremos la posibilidad de contar siempre con la última versión de 
   los programas, o de poder instalar programas nuevos que aparezcan.
+
+
+Sistema Base
+------------
+
+- Entorno de escritorio : xfce
+- Navegador web : chromium (y iceweasel?)
+- Programas y plugins utilizados por las materias.
+- Launcher del Instalador de Debian (icono que aperece en el escritorio una vez
+  iniciado el Live CD, que permite instalar el sistema en la máquina)
 
 
 Objetivos secundarios
@@ -55,16 +59,6 @@ FiDebian?
 FaiDebian ?
 GNUFix?
 Colocar sugerencias..
-
-
-Sistema Base
-------------
-
-Entorno de escritorio : xfce
-Navegador web : chromium (y iceweasel?)
-Programas y plugins utilizados por las materias.
-Launcher del Instalador de Debian (icono que aperece en el escritorio una vez
-iniciado el Live CD, que permite instalar el sistema en la máquina)
 
 
 Uso
