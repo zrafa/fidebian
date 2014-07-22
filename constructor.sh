@@ -26,7 +26,9 @@ fi
 
 apt-get update
 apt-get install live-build
-mkdir debian-live ; cd debian-live ; lb init ; lb config
+mkdir debian-live ; cd debian-live 
+lb init 
+lb config -a i386 -k 486
 lb config --distribution testing
 lb config --archive-areas "main contrib non-free"
 lb config --bootappend-live "boot=live config locales=es_AR.UTF-8 keyboard-layouts=es"
