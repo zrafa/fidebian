@@ -2,10 +2,15 @@
 Basado en los colores del logo de la Facultad de Informatica.
 
 
-xfce4 con
+xfce4
 
 Tema de los 'bordes de ventana' : Gelly (viene en el paquete xfce4-themes)
 Tema de 'iconos' : Treepata (hay que bajarlo y colocar el directorio Treepata/ en /usr/share/icons/)
-Wallpaper : xfce-blue.jpga (ya viene en el paquete xfdesktop4-data)
-El Tema de los 'Controles' (comunmente asociado a gtk) : Clearlooks (modificado)
+El Tema de los 'Controles' (comunmente asociado a gtk) : xfce-dawn 
 
+Wallpaper : xfce-blue.jpg (ya viene en el paquete xfdesktop4-data, pero esta
+modificado para que tenga sombra en donde va el panel).
+
+El resto del panel (los plugins visibles y el formato del panel
+es complejo). Lo que hicimos fue ir probando, quitando, agregando.
+Al final, cuando nos gusta el resultado, copiamos lo que hay en $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/* a chroot/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/
