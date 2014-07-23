@@ -35,3 +35,13 @@ lb config --bootappend-live "boot=live config locales=es_AR.UTF-8 keyboard-layou
 echo "task-xfce-desktop iceweasel task-spanish task-spanish-desktop debian-installer-launcher" >> config/package-lists/my.list.chroot
 lb build
 
+
+# Luego de una primera creacion de la imagen se puede modificar chroot/
+# para "personalizar" la imagen manualmente.
+# Luego, para reconstruir nuevamente se ejecuta 
+# lb clean --binary
+# lb build
+#
+# Si lo anterior falla no queda otra que intentar
+# lb clean --purge
+# lb build
