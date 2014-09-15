@@ -66,3 +66,26 @@ Uso
 
 Para construir la distribución : make
 
+
+
+Lo que los usuarios utilizan
+----------------------------
+
+Laura Cecchi está utilizando Debian testing. Así como algunos pocos docentes
+mas.
+
+Algunos detalles :
+
+- Quieren skype para comunicacion. La ultima version de la web de skype
+está para descarga en formato Debian. IMPORTANTE: para que funcione el sonido
+se necesita pulseaudio server.
+- gummi tiene buena aceptación para Latex. Hay que estar seguros que están
+los paquetes para latex en español (acentos, eñes), utf8, figuras, separador
+de silabas, etc.
+- mate-pluma es el viejo editor de texto gnome-text-editor. El nuevo
+  editor de gnome es odiado casi por todos, asi que se puede instalar pluma.
+- EL complemento de ver el estado de la bateria es de suma importancia
+  para los docentes con netbooks/notebooks. Verificar cual es el que funciona
+  bien (Laura Cecchi lo tiene en funcionamiento).
+- La fecha y hora debe mostrar tambien el calendario.
+- No es sencillo en xfce cambiar la fecha y hora. Ver que hacer.
