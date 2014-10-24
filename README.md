@@ -26,7 +26,7 @@ Objetivos :
 * Casi nunca se rompe el apt-get update; apt-get dist-upgrade, 
   aun cuando se realice una vez al año.
 * Nunca hay que cambiar de version, Debian Testing es siempre la última
-  versión.
+  versión (rolling. En /etc/apt/sources.list debe decir "testing" como version)
 * Tendremos la posibilidad de contar siempre con la última versión de 
   los programas, o de poder instalar programas nuevos que aparezcan.
 
@@ -34,11 +34,12 @@ Objetivos :
 Sistema Base
 ------------
 
-- Entorno de escritorio : xfce
+- Entorno de escritorio : xfce o mate?
 - Navegador web : chromium (y iceweasel?)
 - Programas y plugins utilizados por las materias.
 - Launcher del Instalador de Debian (icono que aperece en el escritorio una vez
   iniciado el Live CD, que permite instalar el sistema en la máquina)
+- Latexila
 
 
 Objetivos secundarios
@@ -79,9 +80,7 @@ Algunos detalles :
 - Quieren skype para comunicacion. La ultima version de la web de skype
 está para descarga en formato Debian. IMPORTANTE: para que funcione el sonido
 se necesita pulseaudio server.
-- gummi tiene buena aceptación para Latex. Hay que estar seguros que están
-los paquetes para latex en español (acentos, eñes), utf8, figuras, separador
-de silabas, etc.
+- gummi (buggy) o latexila?. Tiene buena aceptación para Latex. Hay que estar seguros que la distro tambien tiene los paquetes para latex en español (acentos, eñes), utf8, figuras, separador de silabas, etc.
 - mate-pluma es el viejo editor de texto gnome-text-editor. El nuevo
   editor de gnome es odiado casi por todos, asi que se puede instalar pluma.
 - EL complemento de ver el estado de la bateria es de suma importancia
@@ -89,3 +88,14 @@ de silabas, etc.
   bien (Laura Cecchi lo tiene en funcionamiento).
 - La fecha y hora debe mostrar tambien el calendario.
 - No es sencillo en xfce cambiar la fecha y hora. Ver que hacer.
+
+
+Software utilizado por las materias
+===================================
+
+- Programas de desarrollo de software esenciales (paquete build-essential que trae libc6-dev | libc-dev, gcc, g++, make, dpkg-dev)
+- Netbeans
+- Java
+- Eclipse
+- php
+- Plugines de c++, php y java para eclipse y netbeans
