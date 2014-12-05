@@ -99,3 +99,14 @@ Software utilizado por las materias
 - Eclipse
 - php
 - Plugines de c++, php y java para eclipse y netbeans
+
+
+Para construir un live cd desde una instalacion de disco
+========================================================
+
+bootcd
+Description-en: run your system from cd without need for disks
+ Build an image of your running Debian System with the command bootcdwrite.
+ You can also build a bootcd ISO image via NFS on a remote System.
+ When you run your system from CD you do not need any disks. All
+ changes will be done in ram.
