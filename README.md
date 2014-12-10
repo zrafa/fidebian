@@ -35,10 +35,30 @@ Sistema Base
 ------------
 
 - Entorno de escritorio : mate (eom, pluma, mate-terminal, atril, engrampa, caja)
+	Paquete : task-mate-desktop
 - Navegador web : chromium (y iceweasel?)
 - Programas y plugins utilizados por las materias.
    Netbeans
    Eclipse
+   wxmaxima (adair)
+   scilab (adair)
+   exelearning (adair)
+   php
+   apache
+   java
+   entorno de desarrollo base : build-essential - Informational list of build-essential packages
+   openssh-server
+   nfs-common
+
+
+ vim-gnome build-essential wireshark eclipse-jdt 
+           netbeans emacs otter bison flex bouml bouml-plugouts-src 
+           php5 libapache2-mod-php5 apache2 mysql-client php5-mysql 
+           php5-curl php5-gd php5-idn php-pear php5-imagick php5-imap
+           php5-mcrypt php5-memcache php5-mhash php5-ming php5-ps php5-pspell
+           php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-json
+           mysql-query-browser helium hmake hugs
+
 - Launcher del Instalador de Debian (icono que aperece en el escritorio una vez
   iniciado el Live CD, que permite instalar el sistema en la máquina)
 - Latexila
@@ -106,9 +126,27 @@ Software utilizado por las materias
 Para construir un live cd desde una instalacion de disco
 ========================================================
 
+Utilizaremos el paquete bootcd
+Configuramos una PC origen con Debian Testing y todo el software utilizado
+en las aulas. Luego con bootcd creamos la imagen a ser arrancada
+via pxe boot por las PCs de las aulas.
+
 bootcd
 Description-en: run your system from cd without need for disks
  Build an image of your running Debian System with the command bootcdwrite.
  You can also build a bootcd ISO image via NFS on a remote System.
  When you run your system from CD you do not need any disks. All
  changes will be done in ram.
+
+Instalar y ejecutar bootcdwrite
+
+Autologin para el Autogestion
+=============================
+
+Habilitando el autologin
+
+Edite /etc/lightdm/lightdm.conf y cámbielo por algo como esto:
+[SeatDefaults] 
+autologin-user=su_usuario 
+autologin-user-timeout=0 
+pam-service=lightdm-autologin 
