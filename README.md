@@ -34,9 +34,11 @@ Objetivos :
 Sistema Base
 ------------
 
-- Entorno de escritorio : xfce o mate?
+- Entorno de escritorio : mate (eom, pluma, mate-terminal, atril, engrampa, caja)
 - Navegador web : chromium (y iceweasel?)
 - Programas y plugins utilizados por las materias.
+   Netbeans
+   Eclipse
 - Launcher del Instalador de Debian (icono que aperece en el escritorio una vez
   iniciado el Live CD, que permite instalar el sistema en la máquina)
 - Latexila
