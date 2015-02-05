@@ -40,7 +40,7 @@ nameserver 8.8.4.4" >> tmp/etc/resolv.conf
 # instalamos kernel, ssh server y grub
 chroot tmp apt-get update
 chroot tmp apt-get -y install linux-image-686-pae
-chroot tmp apt-get -y install openssh-server grub2
+chroot tmp apt-get -y install openssh-server
 # instalamos software de las aulas
 mount --bind /dev/ tmp/dev/
 mount --bind /sys tmp/sys
@@ -87,6 +87,7 @@ fi
 # trick para instalar el grub en el primer boot de la maquina virtual
 # TODO ATENTOS ! : Unicamente valido si creamos una imagen para virtmanager. 
 # Si es para CD-DVD NO hacer ESTO!
+chroot tmp apt-get -y install grub2
 cp tmp/etc/rc.local tmp/etc/rc.local.bkp
 echo '#!/bin/bash
 
