@@ -46,6 +46,18 @@ chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium ic
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
 # instalamos software adicional como netbeans desde unstable
 
+# Decirle que queremos :
+#   locales=es_AR.UTF-8 
+#   keyboard-layouts=es"
+
+# Instalar bootcd y ejecutarlo (bootcdwrite) para generar el DVD booteable
+
+
+
+
+
+
+
 # trick para instalar el grub en el primer boot de la maquina virtual
 cp tmp/etc/rc.local tmp/etc/rc.local.bkp
 echo '#!/bin/bash
