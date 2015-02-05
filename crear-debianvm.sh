@@ -45,7 +45,7 @@ chroot tmp apt-get -y install openssh-server grub2
 mount --bind /dev/ tmp/dev/
 mount --bind /sys tmp/sys
 mount --bind /proc tmp/proc
-chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab bootcd
+chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab bootcd emacs
 # falta pulseaudio ?
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
 # instalamos software adicional como netbeans desde unstable
@@ -59,7 +59,29 @@ chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium ic
 
 
 
+echo -n "
 
+==========  Elija una opcion  ===========================
+1 : Crear iso
+2 : Crear imagen para virt-manager
+3 : Solamente el directorio image
+
+Su eleccion : "
+
+read respuesta
+while ! (echo $respuesta | egrep "1|2|3") ; do
+	echo -n "
+Su eleccion : "
+	read respuesta
+done
+
+
+if [ $respuesta = "3" ] ; then 
+	exit 0
+elif [ $respuesta = "1" ] ; then 
+	chroot tmp bootcdwrite
+	exit 0
+fi
 
 
 # trick para instalar el grub en el primer boot de la maquina virtual
