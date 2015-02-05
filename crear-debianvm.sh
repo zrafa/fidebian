@@ -42,7 +42,11 @@ chroot tmp apt-get update
 chroot tmp apt-get -y install linux-image-686-pae
 chroot tmp apt-get -y install openssh-server grub2
 # instalamos software de las aulas
-chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab
+mount --bind /dev/ tmp/dev/
+mount --bind /sys tmp/sys
+mount --bind /proc tmp/proc
+chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab bootcd
+# falta pulseaudio ?
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
 # instalamos software adicional como netbeans desde unstable
 
@@ -59,6 +63,8 @@ chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium ic
 
 
 # trick para instalar el grub en el primer boot de la maquina virtual
+# TODO ATENTOS ! : Unicamente valido si creamos una imagen para virtmanager. 
+# Si es para CD-DVD NO hacer ESTO!
 cp tmp/etc/rc.local tmp/etc/rc.local.bkp
 echo '#!/bin/bash
 

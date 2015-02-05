@@ -1,0 +1,109 @@
+
+
+Ubuntu Linux 10.10 - Año 2011
+Creamos una imagen y luego la replicamos a todos los nodos de las aulas de los laboratorios.
+
+Creación de la Imagen
+
+Instalamos Ubuntu 10.10. Usuario syadmin como administrador.
+Instalamos algunos paquetes extras :
+       apt-get install nfs-common openssh-server
+Copiamos la clave pública del usuario bootmaster en authorized_keys :
+         mkdir /home/syadmin/.ssh ; chmod 700 /home/syadmin/.ssh ; chown syadmin /home/syadmin/.ssh
+         mkdir /root/.ssh ; chmod 700 /root/.ssh ; chown syadmin /root/.ssh
+         scp bootmaster@10.0.5.7:.ssh/id_dsa.pub /home/syadmin/.ssh/authorized_keys
+         scp bootmaster@10.0.5.7:.ssh/id_dsa.pub /root/.ssh/authorized_keys
+Modificamos /etc/apt/source.list para que apunte a repoubu a :
+Instalamos paquetes para las materias :
+         apt-get install vim-gnome build-essential wireshark eclipse-jdt 
+           netbeans emacs otter bison flex bouml bouml-plugouts-src 
+           php5 libapache2-mod-php5 apache2 mysql-client php5-mysql 
+           php5-curl php5-gd php5-idn php-pear php5-imagick php5-imap
+           php5-mcrypt php5-memcache php5-mhash php5-ming php5-ps php5-pspell
+           php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl php5-json
+           mysql-query-browser helium hmake hugs
+Habilitamos en apache2 userdir :
+        root@mt21:/etc/apache2# a2enmod userdir
+Editamos userdir.conf y agregamos /export/ antes de /home/, para que quede como :
+         root@mt21:/etc/apache2# grep export /etc/apache2/mods-enabled/userdir.conf 
+         <Directory /export/home/*/public_html>
+         root@mt21:/etc/apache2# /etc/init.d/apache2 restart
+Instalamos paquetes extras de otras materias que no vienen en los repositorios de Ubuntu
+
+Eclipse PHP : utilizamos las instrucciones para instalarlo desde launchpad :
+ https://help.ubuntu.com/community/EclipsePDT#From%20Yogarine%27s%20Eclipse%20PPA
+
+         add-apt-repository ppa:yogarine/eclipse/ubuntu
+         apt-get update 
+         apt-get install eclipse-pdt
+(Lo cual reinstaló todo eclipse (o al menos, estos paquetes): eclipse eclipse-dltk eclipse-dtp eclipse-emf eclipse-gef) (Las instrucciones desde eclipse -> help -> install new software, via galileo, no encontró ningun programa a instalar.)
+
+Obtenemos CIAO desde :  http://clip.dia.fi.upm.es/Software/Ciao/Beta/packages/CiaoDE/CiaoDE-1.13.0-11293/CiaoDE-1.13.0-11293.i386.deb
+Obtenemos Mysql Worbench desde :  http://dev.mysql.com/downloads/workbench/5.2.html#downloads (paquete mysql-workbench-gpl-5.2.33-1ubu1010-i386.deb).
+Obtenemos qtspim desde :  http://downloads.sourceforge.net/project/spimsimulator/qtspim_9.0.1_linux32.deb?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fspimsimulator%2Ffiles%2F&ts=1300382105&use_mirror=ufpr
+Obtenemos jflap
+Instalamos todo ese software :
+         apt-get install libzip1 python-paramiko python-pysqlite2 
+         dpkg -i mysql-workbench-gpl-5.2.33-1ubu1010-i386.deb 
+
+         dpkg -i CiaoDE-1.13.0-11293.i386.deb 
+
+         apt-get install libqtcore4 libqtgui4 qt4-dev-tools 
+         dpkg -i qtspim_9.0.1_linux32.deb 
+
+         mkdir -p /opt/jflap/
+         cp JFLAP.jar /opt/jflap/
+
+         cp jflap.desktop /usr/share/applications/
+Configurando el host como cliente de LDAP y NFS
+
+Original :  http://osobox.ods.org/Público/Sysadmin/Distros/Ubuntu.html
+
+#instalar paquetes que faltan
+aptitude install auth-client-config libpam-ldap libnss-ldap
+#
+# modificar ldap.conf
+ARCHIVO=/etc/ldap.conf
+perl -p -i -e 's/^host 127.0.0.1/host 10.0.2.3/' $ARCHIVO
+# 
+# Chequeamos si en $ARCHIVO existe host apuntando a picun, si no lo agregamos asi:
+# host 10.0.2.3 
+# y comentamos ldap:// (uri).
+#
+perl -p -i -e 's/^base dc=.*/base ou=dcc,dc=uncoma,dc=edu,dc=ar/' $ARCHIVO
+sed -i.bak -e '/#bind_policy hard/ abind_policy=soft' $ARCHIVO
+
+# La linea que sigue no hace falta ejecutarla.
+# dpkg-reconfigure ldap-auth-config
+
+#
+#
+# El siguiente paso requiere configurar el camino de root
+perl -p -i -e 's/rootbinddn .*/rootbinddn uid=admin,ou=dcc,dc=uncoma,dc=edu,dc=ar/' /etc/ldap.conf
+#
+auth-client-config -t nss -p lac_ldap
+#
+# insertar "auth    optional        pam_group.so" en 
+# /etc/pam.d/gdm AND /etc/pam.d/login 
+CADENA="auth    optional        pam_group.so"
+sed -i.bak -e "2 i$CADENA" /etc/pam.d/gdm
+sed -i.bak -e "4 i$CADENA" /etc/pam.d/login
+#
+# Agregar grupos
+LOGIN="login;*;*;Al0000-2400;users,cdrom,floppy,plugdev,audio,dip"
+KDM="kdm;*;*;Al0000-2400;users,cdrom,floppy,plugdev,audio,dip,video"
+GDM="gdm;*;*;Al0000-2400;users,cdrom,floppy,plugdev,audio,dip,video"
+for TEXTO in $LOGIN $KDM $GDM
+do
+        sed -i.bak -e "4 i$TEXTO" /etc/security/group.conf
+done
+En fstab agregamos el host como cliente de NFS :
+
+mkdir -p /export/home
+10.0.2.3:/export/home    /export/home    nfs    rsize=8192,wsize=8192
+Para que Tome el Hostname desde el Servidor DHCP
+
+Dejamos /etc/hostname vacio y agregamos en /etc/network/interfaces :
+
+auto eth0
+iface eth0 inet dhcp
