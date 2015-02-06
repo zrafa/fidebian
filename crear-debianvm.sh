@@ -41,20 +41,25 @@ nameserver 8.8.4.4" >> tmp/etc/resolv.conf
 chroot tmp apt-get update
 chroot tmp apt-get -y install linux-image-686-pae
 chroot tmp apt-get -y install openssh-server
-# instalamos el locales y seleccionamos es-AR.utf8
-chroot tmp apt-get -y install locales
-chroot tmp dpkg-reconfigure locales
-# instalamos software de las aulas
+
 mount --bind /dev/ tmp/dev/
 mount --bind /sys tmp/sys
 mount --bind /proc tmp/proc
-chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab bootcd emacs
+# instalamos el locales y seleccionamos es-AR.utf8
+#   locales=es_AR.UTF-8 
+chroot tmp apt-get -y install locales
+chroot tmp dpkg-reconfigure locales
+
+# instalamos software de las aulas
+chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs
+
 # falta pulseaudio ?
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
 # instalamos software adicional como netbeans desde unstable
 
+# instalamos los paquetes en espaniol
+chroot tmp apt-get install iceweasel-l10n-es-ar libreoffice-l10n-es
 # Decirle que queremos :
-#   locales=es_AR.UTF-8 
 #   keyboard-layouts=es"
 
 # Instalar bootcd y ejecutarlo (bootcdwrite) para generar el DVD booteable
@@ -82,6 +87,8 @@ done
 if [ $respuesta = "3" ] ; then 
 	exit 0
 elif [ $respuesta = "1" ] ; then 
+	chroot tmp apt-get -y install bootcd
+	echo 'Debian GNU/Linux version Testing - Facultad de Informatica - Universidad Nacional del Comahue' > tmp/usr/share/bootcd/default.txt 
 	chroot tmp bootcdwrite
 	exit 0
 fi
