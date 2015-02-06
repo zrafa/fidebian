@@ -20,7 +20,11 @@ for i in debootstrap qemu-img qemu-nbd qemu ; do
 	if ! which $i ; then echo "Falta $i" ; exit 1 ; fi
 done
 
-rm -rf tmp/ ; mkdir tmp
+if [ -d tmp/ ] ; then 
+	echo "Error: el directorio tmp/ existe! (`pwd`). Debe borrarlo o moverlo antes de ejecutar $0"
+	exit 1
+fi
+mkdir tmp
 debootstrap testing tmp 
 
 # password de root : root
@@ -90,11 +94,17 @@ done
 
 
 if [ $respuesta = "3" ] ; then 
+	umount tmp/dev
+	umount tmp/sys
+	umount tmp/proc
 	exit 0
 elif [ $respuesta = "1" ] ; then 
 	chroot tmp apt-get -y install bootcd
 	echo 'Debian GNU/Linux version Testing - Facultad de Informatica - Universidad Nacional del Comahue' > tmp/usr/share/bootcd/default.txt 
 	chroot tmp bootcdwrite
+	umount tmp/dev
+	umount tmp/sys
+	umount tmp/proc
 	exit 0
 fi
 
