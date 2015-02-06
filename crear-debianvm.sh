@@ -8,13 +8,13 @@
 #     ./crear-debianvm.sh  nbd0|nbd1..  size(enMegabytes)
 #
 
-if ! [ $# -eq 2 ] ; then 
-	echo "Uso : ./crear-debianvm.sh  nbd0|nbd1..  size(enMegabytes)"
-	exit 1 
-fi
+# if ! [ $# -eq 2 ] ; then 
+# 	echo "Uso : ./crear-debianvm.sh  nbd0|nbd1..  size(enMegabytes)"
+# 	exit 1 
+# fi
 
-NBD=$1
-SIZE=$2
+# NBD=$1
+# SIZE=$2
 
 for i in debootstrap qemu-img qemu-nbd qemu ; do
 	if ! which $i ; then echo "Falta $i" ; exit 1 ; fi
@@ -127,4 +127,5 @@ poweroff
 ' > tmp/etc/rc.local
 
 
-./crear-imagen-qemu.sh $NBD $SIZE
+# ./crear-imagen-qemu.sh $NBD $SIZE en Megabytes
+./crear-imagen-qemu.sh nbd0 10000
