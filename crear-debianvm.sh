@@ -21,7 +21,8 @@ for i in debootstrap qemu-img qemu-nbd qemu ; do
 done
 
 if [ -d tmp/ ] ; then 
-	echo "Error: el directorio tmp/ existe! (`pwd`). Debe borrarlo o moverlo antes de ejecutar $0"
+	echo "Error: el directorio tmp/ existe! (`pwd`). 
+Se debe borrar o mover antes de ejecutar $0"
 	exit 1
 fi
 mkdir tmp
@@ -57,8 +58,13 @@ mount --bind /proc tmp/proc
 # instalamos el locales y seleccionamos es-AR.utf8
 #   locales=es_AR.UTF-8 
 chroot tmp apt-get -y install locales
-chroot tmp dpkg-reconfigure locales
+echo "es_AR.UTF-8 UTF-8" > tmp/etc/locale.gen    
+chroot tmp /usr/sbin/locale-gen
+# chroot tmp dpkg-reconfigure locales
 
+# time zone
+echo "America/Argentina/Buenos_Aires" > tmp/etc/timezone    
+chroot tmp dpkg-reconfigure -f noninteractive tzdata
 # instalamos software de las aulas
 chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs
 
