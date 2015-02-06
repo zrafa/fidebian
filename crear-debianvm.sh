@@ -41,6 +41,9 @@ nameserver 8.8.4.4" >> tmp/etc/resolv.conf
 chroot tmp apt-get update
 chroot tmp apt-get -y install linux-image-686-pae
 chroot tmp apt-get -y install openssh-server
+# instalamos el locales y seleccionamos es-AR.utf8
+chroot tmp apt-get -y install locales
+chroot tmp dpkg-reconfigure locales
 # instalamos software de las aulas
 mount --bind /dev/ tmp/dev/
 mount --bind /sys tmp/sys
