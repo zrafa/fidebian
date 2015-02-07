@@ -1,0 +1,5 @@
+
+pxeserver
+migracion de pcs a debian testing
+migracion de picun a mysql+ldap
+switches de gigabit
