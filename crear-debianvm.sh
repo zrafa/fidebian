@@ -109,7 +109,8 @@ if [ $respuesta = "3" ] ; then
 elif [ $respuesta = "1" ] ; then 
 	chroot tmp apt-get -y install bootcd
 	echo 'Debian GNU/Linux version Testing 
-Facultad de Informatica - Universidad Nacional del Comahue' > tmp/usr/share/bootcd/default.txt 
+Facultad de Informatica - Universidad Nacional del Comahue
+' > tmp/usr/share/bootcd/default.txt 
 	chroot tmp bootcdwrite
 	umount tmp/dev
 	umount tmp/sys
