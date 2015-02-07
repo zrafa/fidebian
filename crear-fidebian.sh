@@ -5,7 +5,7 @@
 # El script no chequea si algo falla. Dale que va..
 # 
 # Uso : 
-#     ./crear-debianvm.sh
+#     ./crear-fidebian.sh
 #
 
 # Requisitos :
@@ -50,7 +50,7 @@ chmod 640 tmp/etc/shadow
 
 
 # hostname
-echo "debianvm" > tmp/etc/hostname
+echo "fidebian" > tmp/etc/hostname
 
 # DNS server from google
 echo "nameserver 8.8.8.8
