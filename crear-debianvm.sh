@@ -66,7 +66,7 @@ chroot tmp /usr/sbin/locale-gen
 echo "America/Argentina/Buenos_Aires" > tmp/etc/timezone    
 chroot tmp dpkg-reconfigure -f noninteractive tzdata
 # instalamos software de las aulas
-chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs
+chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs build-essential git-core
 
 # falta pulseaudio ?
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
@@ -80,6 +80,8 @@ chroot tmp apt-get install iceweasel-l10n-es-ar libreoffice-l10n-es
 # Instalar bootcd y ejecutarlo (bootcdwrite) para generar el DVD booteable
 
 
+# Tuneo : no queremos nada acá, pero podemos dejar alguna marca nuestra al menos
+cp extras/lines-wallpaper_1920x1080.svg tmp/usr/share/images/desktop-base/
 
 
 echo -n "
@@ -106,7 +108,8 @@ if [ $respuesta = "3" ] ; then
 	exit 0
 elif [ $respuesta = "1" ] ; then 
 	chroot tmp apt-get -y install bootcd
-	echo 'Debian GNU/Linux version Testing - Facultad de Informatica - Universidad Nacional del Comahue' > tmp/usr/share/bootcd/default.txt 
+	echo 'Debian GNU/Linux version Testing 
+Facultad de Informatica - Universidad Nacional del Comahue' > tmp/usr/share/bootcd/default.txt 
 	chroot tmp bootcdwrite
 	umount tmp/dev
 	umount tmp/sys
