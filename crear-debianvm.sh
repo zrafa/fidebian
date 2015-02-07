@@ -5,26 +5,40 @@
 # El script no chequea si algo falla. Dale que va..
 # 
 # Uso : 
-#     ./crear-debianvm.sh  nbd0|nbd1..  size(enMegabytes)
+#     ./crear-debianvm.sh
 #
 
-# if ! [ $# -eq 2 ] ; then 
-# 	echo "Uso : ./crear-debianvm.sh  nbd0|nbd1..  size(enMegabytes)"
-# 	exit 1 
-# fi
+# Requisitos :
+# - Que haya espacio disponible
+# - Que el usuario sea root
 
-# NBD=$1
-# SIZE=$2
 
-for i in debootstrap qemu-img qemu-nbd qemu ; do
-	if ! which $i ; then echo "Falta $i" ; exit 1 ; fi
-done
+# Verificamos que haya al menos 10GB libres
+
+LIBRE=`df -B 1G . | tail -1 | awk '{print $4}'`
+if [[ $LIBRE -lt 10 ]]; then
+        echo "No hay al menos 10GB de espacio Libre"
+        exit 1
+fi
+
+
+# Verificamos que el usuario sea root
+
+if [[ "`whoami`" != "root" ]]; then
+        echo "Debe ser root lamentablemente"
+        exit 1
+fi
+
+# Verificamos que exista debootstrap
+if ! which debootstrap ; then echo "Falta debootstrap" ; exit 1 ; fi
+
 
 if [ -d tmp/ ] ; then 
 	echo "Error: el directorio tmp/ existe! (`pwd`). 
 Se debe borrar o mover antes de ejecutar $0"
 	exit 1
 fi
+
 mkdir tmp
 debootstrap testing tmp 
 
@@ -120,6 +134,9 @@ Facultad de Informatica - Universidad Nacional del Comahue
 fi
 
 
+for i in qemu-img qemu-nbd qemu ; do
+	if ! which $i ; then echo "Falta $i" ; exit 1 ; fi
+done
 # trick para instalar el grub en el primer boot de la maquina virtual
 # TODO ATENTOS ! : Unicamente valido si creamos una imagen para virtmanager. 
 # Si es para CD-DVD NO hacer ESTO!
