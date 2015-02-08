@@ -87,7 +87,7 @@ chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium ic
 # instalamos software adicional como netbeans desde unstable
 
 # instalamos los paquetes en espaniol
-chroot tmp apt-get install iceweasel-l10n-es-ar libreoffice-l10n-es
+chroot tmp apt-get -y install iceweasel-l10n-es-ar libreoffice-l10n-es
 # Decirle que queremos :
 #   keyboard-layouts=es"
 
@@ -98,13 +98,16 @@ chroot tmp apt-get install iceweasel-l10n-es-ar libreoffice-l10n-es
 cp extras/lines-wallpaper_1920x1080.svg tmp/usr/share/images/desktop-base/
 cp extras/login-background.svg tmp/usr/share/images/desktop-base/
 
+umount tmp/dev
+umount tmp/sys
+umount tmp/proc
 
 echo -n "
 
 ==========  Elija una opcion  ===========================
 1 : Crear iso
 2 : Crear imagen para virt-manager
-3 : Solamente el directorio image
+3 : Salir y obtener unicamente el directorio image
 
 Su eleccion : "
 
@@ -116,17 +119,15 @@ Su eleccion : "
 done
 
 
-umount tmp/dev
-umount tmp/sys
-umount tmp/proc
-
 if [ $respuesta = "3" ] ; then 
+	echo "Directorio tmp/ (`pwd`/tmp/) contiene el sistema Debian creado."
 	exit 0
 elif [ $respuesta = "1" ] ; then 
 	echo 'Debian GNU/Linux version Testing 
 Facultad de Informatica - Universidad Nacional del Comahue
 ' > tmp/usr/share/bootcd/default.txt 
 	chroot tmp bootcdwrite
+	echo "tmp/var/spool/bootcd/cdimage.iso es el archivo live DVD Debian creado."
 	exit 0
 fi
 
