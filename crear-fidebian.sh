@@ -57,8 +57,8 @@ echo "nameserver 8.8.8.8
 nameserver 8.8.4.4" >> tmp/etc/resolv.conf 
 
 # se agrega el mirror local de Debian
-echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
-# deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+echo '# deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
+deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > tmp/etc/apt/sources.list
 
 # instalamos kernel, ssh server y grub
