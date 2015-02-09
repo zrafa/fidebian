@@ -93,6 +93,9 @@ chroot tmp apt-get -y install iceweasel-l10n-es-ar libreoffice-l10n-es
 
 # Instalar bootcd y ejecutarlo (bootcdwrite) para generar el DVD booteable
 
+# Esta es una prueba para obtener un sistema en espaniol
+# Test: el locale esta configurado, pero no aparece en espaniol el sistema
+echo "LANG=es_AR.UTF-8" > tmp/etc/default/locale
 
 # Tuneo : no queremos nada acá, pero podemos dejar alguna marca nuestra al menos
 cp extras/lines-wallpaper_1920x1080.svg tmp/usr/share/images/desktop-base/
@@ -126,7 +129,7 @@ elif [ $respuesta = "1" ] ; then
 	echo 'Debian GNU/Linux version Testing 
 Facultad de Informatica - Universidad Nacional del Comahue
 ' > tmp/usr/share/bootcd/default.txt 
-	chroot tmp bootcdwrite
+	chroot tmp bootcdwrite -s
 	echo "tmp/var/spool/bootcd/cdimage.iso es el archivo live DVD Debian creado."
 	exit 0
 fi
