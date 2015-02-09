@@ -13,6 +13,17 @@
 # - Que el usuario sea root
 
 
+# FUNCTION : crear listado de repositorios
+function crear_listado_de_repos(){
+	
+	echo '# deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
+deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+' > tmp/etc/apt/sources.list
+chroot tmp apt-get update
+
+
+}
+
 # Verificamos que haya al menos 10GB libres
 
 LIBRE=`df -B 1G . | tail -1 | awk '{print $4}'`
@@ -57,12 +68,9 @@ echo "nameserver 8.8.8.8
 nameserver 8.8.4.4" >> tmp/etc/resolv.conf 
 
 # se agrega el mirror local de Debian
-echo '# deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
-deb http://ftp.us.debian.org/debian/ testing main contrib non-free
-' > tmp/etc/apt/sources.list
+crear_listado_de_repos
 
 # instalamos kernel, ssh server y grub
-chroot tmp apt-get update
 chroot tmp apt-get -y install linux-image-686-pae
 chroot tmp apt-get -y install openssh-server
 
@@ -76,6 +84,7 @@ echo "es_AR.UTF-8 UTF-8" > tmp/etc/locale.gen
 chroot tmp /usr/sbin/locale-gen
 # chroot tmp dpkg-reconfigure locales
 
+
 # time zone
 echo "America/Argentina/Buenos_Aires" > tmp/etc/timezone    
 chroot tmp dpkg-reconfigure -f noninteractive tzdata
@@ -85,6 +94,11 @@ chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium ic
 # falta pulseaudio ?
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
 # instalamos software adicional como netbeans desde unstable
+echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
+' >> tmp/etc/apt/sources.list
+chroot tmp apt-get update
+chroot tmp apt-get -y install netbeans
+crear_listado_de_repos
 
 # instalamos los paquetes en espaniol
 chroot tmp apt-get -y install iceweasel-l10n-es-ar libreoffice-l10n-es
