@@ -16,8 +16,8 @@
 # FUNCTION : crear listado de repositorios
 function crear_listado_de_repos(){
 	
-	echo '# deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
-deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+	echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
+# deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > tmp/etc/apt/sources.list
 chroot tmp apt-get update
 
@@ -51,7 +51,7 @@ Se debe borrar o mover antes de ejecutar $0"
 fi
 
 mkdir tmp
-debootstrap testing tmp 
+debootstrap testing tmp http://mirror.fi.uncoma.edu.ar/debian/
 
 # password de root : root
 cat tmp/etc/shadow | grep -v "root:" >> tmp/shadow.tmp
