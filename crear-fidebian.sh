@@ -146,6 +146,8 @@ if [ $respuesta = "3" ] ; then
 	echo "Directorio tmp/ (`pwd`/tmp/) contiene el sistema Debian creado."
 	exit 0
 elif [ $respuesta = "1" ] ; then 
+	# autologin con usuario invitado
+	cat tmp/etc/lightdm/lightdm.conf  | sed -e "s/#autologin-user=/autologin-user=invitado/" -e "s/#autologin-user-timeout=0/autologin-user-timeout=0/" >> tmp/lightdm.conf.bkp ; mv tmp/lightdm.conf.bkp tmp/etc/lightdm/lightdm.conf
 	echo 'Debian GNU/Linux version Testing 
 Facultad de Informatica - Universidad Nacional del Comahue
 ' > tmp/usr/share/bootcd/default.txt 
