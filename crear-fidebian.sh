@@ -97,6 +97,10 @@ chroot tmp dpkg-reconfigure -f noninteractive tzdata
 # instalamos software de las aulas
 chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
 
+# Volvemos a agregar los DNS server from google
+echo "nameserver 8.8.8.8
+nameserver 8.8.4.4" > tmp/etc/resolv.conf 
+
 # falta pulseaudio ?
 # instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
 # instalamos software adicional como netbeans desde unstable
