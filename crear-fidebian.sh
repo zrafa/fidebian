@@ -59,6 +59,12 @@ echo 'root:$6$5KV7doB3$sum2xuCBM9TibuVGAwvZ4rbT.EL1.RG.CmmZrEndf6NESIiTJ1pIrILC3
 mv tmp/shadow.tmp tmp/etc/shadow
 chmod 640 tmp/etc/shadow
 
+# Creamos el usuario invitado
+chroot tmp useradd -d /home/invitado -c invitado -m -s /bin/bash -u 1500 -U invitado 
+cat tmp/etc/shadow | grep -v "invitado:" >> tmp/shadow.tmp
+echo 'invitado:$6$O0IGEAzF$EIdnVAEPX06RJiGMBEdm6IrQKvupcd63n1skNsZO8qImOyp/B2lh2zfuuF/2J.J9VzMyVQbCpjBc6JZp8EDPB/:16476:0:99999:7:::' >> tmp/shadow.tmp
+mv tmp/shadow.tmp tmp/etc/shadow
+chmod 640 tmp/etc/shadow
 
 # hostname
 echo "fidebian" > tmp/etc/hostname
@@ -172,3 +178,4 @@ poweroff
 
 # ./crear-imagen-qemu.sh $NBD $SIZE en Megabytes
 ./crear-imagen-qemu.sh nbd0 10000
+
