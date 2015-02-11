@@ -1,0 +1,8 @@
+
+- probar pxeserver con disco y bootear Windows
+ Una posibilidad es que el bootloader pxe por red traiga un grub y permita bootear el windows del disco interno o el Linux desde el pxeserver.
+
+ Otra posibilidad es que el grub en el disco interno sepa como bootear un linux desde el pxeserver.
+
+
+- Instalador
