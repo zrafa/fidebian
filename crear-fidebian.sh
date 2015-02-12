@@ -97,7 +97,7 @@ chroot tmp dpkg-reconfigure -f noninteractive tzdata
 # instalamos software de las aulas
 chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
 
-# Volvemos a agregar los DNS server from google
+# Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
 nameserver 8.8.4.4" > tmp/etc/resolv.conf 
 
@@ -124,6 +124,9 @@ echo "LANG=es_AR.UTF-8" > tmp/etc/default/locale
 # Tuneo : no queremos nada acá, pero podemos dejar alguna marca nuestra al menos
 cp extras/lines-wallpaper_1920x1080.svg tmp/usr/share/images/desktop-base/
 cp extras/login-background.svg tmp/usr/share/images/desktop-base/
+
+# Quitamos los archives de paquetes bajados
+chroot tmp apt-get autoclean
 
 umount tmp/dev
 umount tmp/sys
