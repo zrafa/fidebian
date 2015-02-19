@@ -115,6 +115,9 @@ chroot tmp apt-get -y install iceweasel-l10n-es-ar libreoffice-l10n-es
 # Decirle que queremos :
 #   keyboard-layouts=es"
 
+#Instalamos las dependencias del instalador live-installer de linuxmint  https://github.com/linuxmint/live-installer
+chroot tmp apt-get -y install python-gtk2 python-glade2 python-webkit python-parted parted gparted python-qt4 python-opencv python-imaging imagemagick isoquery desktop-file-utils shared-mime-info sysv-rc menu gdisk iso-codes locales adduser
+
 # Instalar bootcd y ejecutarlo (bootcdwrite) para generar el DVD booteable
 
 # Esta es una prueba para obtener un sistema en espaniol
