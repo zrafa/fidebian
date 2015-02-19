@@ -80,9 +80,9 @@ crear_listado_de_repos
 chroot tmp apt-get -y install linux-image-686-pae
 chroot tmp apt-get -y install openssh-server
 
-mount --bind /dev/ tmp/dev/
-mount --bind /sys tmp/sys
-mount --bind /proc tmp/proc
+mount -t proc proc tmp/proc
+mount -t sysfs sys tmp/sys
+mount --bind /dev tmp/dev
 # instalamos el locales y seleccionamos es-AR.utf8
 #   locales=es_AR.UTF-8 
 chroot tmp apt-get -y install locales
