@@ -157,3 +157,8 @@ Construir el paquete live-installer de linuxmint
 
 cd live-installer 
 dpkg-buildpackage -us -uc
+rm tmp/lib/live/mount/medium/live/filesystem.squashfs
+mksquashfs tmp/ filesystem.squashfs
+mv filesystem.squashfs tmp/lib/live/mount/medium/live/filesystem.squashfs
+cdroot tmp bootcdwrite -s
+
