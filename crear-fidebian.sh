@@ -134,7 +134,7 @@ cp extras/lines-wallpaper_1920x1080.svg tmp/usr/share/images/desktop-base/
 cp extras/login-background.svg tmp/usr/share/images/desktop-base/
 
 # Instalamos GRUB
-chroot tmp apt-get -y install grub-common grub-pc grub-pc-bin
+chroot tmp apt-get -y install grub2
 
 # Quitamos los archives de paquetes bajados
 chroot tmp apt-get autoclean
@@ -181,7 +181,7 @@ done
 # trick para instalar el grub en el primer boot de la maquina virtual
 # TODO ATENTOS ! : Unicamente valido si creamos una imagen para virtmanager. 
 # Si es para CD-DVD NO hacer ESTO!
-chroot tmp apt-get -y install grub2
+# chroot tmp apt-get -y install grub2
 cp tmp/etc/rc.local tmp/etc/rc.local.bkp
 echo '#!/bin/bash
 
