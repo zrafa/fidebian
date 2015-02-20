@@ -150,3 +150,10 @@ Edite /etc/lightdm/lightdm.conf y cámbielo por algo como esto:
 autologin-user=su_usuario 
 autologin-user-timeout=0 
 pam-service=lightdm-autologin 
+
+
+Construir el paquete live-installer de linuxmint
+================================================
+
+cd live-installer 
+dpkg-buildpackage -us -uc
