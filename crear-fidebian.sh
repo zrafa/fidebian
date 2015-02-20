@@ -128,6 +128,9 @@ echo "LANG=es_AR.UTF-8" > tmp/etc/default/locale
 cp extras/lines-wallpaper_1920x1080.svg tmp/usr/share/images/desktop-base/
 cp extras/login-background.svg tmp/usr/share/images/desktop-base/
 
+# Instalamos GRUB
+chroot tmp apt-get -i install grub-common grub-pc grub-pc-bin
+
 # Quitamos los archives de paquetes bajados
 chroot tmp apt-get autoclean
 
