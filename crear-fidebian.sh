@@ -121,7 +121,7 @@ chroot tmp apt-get -y install python-gtk2 python-glade2 python-webkit python-par
 # Antes de crear el paquete debian, comentamos en /usr/lib/live-installer/installer.py la parte de remover los paquetes live, la parte de poner un face al usuario, la parge de kdm y hacemos esto en /usr/share/live-installer/slideshow :
 #  for i in * ; do cat $i | sed -e "s/ Mint//g" -e "s/Linux/GNU\/Linux/g" > /tmp/${i} ; mv /tmp/${i} $i ; done
 
-#Paquetes necesarios para cups y escaner
+# Instalar Paquetes necesarios para cups y escaner
 chroot tmp apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
 
 
@@ -137,6 +137,9 @@ cp extras/login-background.svg tmp/usr/share/images/desktop-base/
 
 # Instalamos GRUB
 chroot tmp apt-get -y install grub2
+
+# TODO: Peligrosisimo. Este workaraound es para poder desbloquear el screensaver :(
+chroot tmp chmod u+s /sbin/unix_chkpwd
 
 # Quitamos los archives de paquetes bajados
 chroot tmp apt-get autoclean
