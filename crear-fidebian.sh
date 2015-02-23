@@ -144,6 +144,18 @@ chroot tmp chmod u+s /sbin/unix_chkpwd
 # Quitamos los archives de paquetes bajados
 chroot tmp apt-get autoclean
 
+# Instalamos el live-installer
+cp extras/live-installer_2015.02.19_all.deb tmp/tmp/
+chroot tmp dpkg -i /tmp/live-installer_2015.02.19_all.deb
+
+# Creamos el squashfs para el instalador
+rm tmp/var/spool/bootcd/cdimage.iso 
+rm tmp/lib/live/mount/medium/live/filesystem.squashfs 
+mksquashfs tmp/ filesystem.squashfs
+cp filesystem.squashfs tmp/lib/live/mount/medium/live/
+
+
+
 umount tmp/dev
 umount tmp/sys
 umount tmp/proc
