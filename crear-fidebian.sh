@@ -156,7 +156,7 @@ chroot tmp dpkg -i /tmp/live-installer_2015.02.19_all.deb
 rm tmp/var/spool/bootcd/cdimage.iso 
 rm tmp/lib/live/mount/medium/live/filesystem.squashfs 
 mksquashfs tmp/ filesystem.squashfs
-cp filesystem.squashfs tmp/lib/live/mount/medium/live/
+mv filesystem.squashfs tmp/lib/live/mount/medium/live/
 
 # Agregamos el icono lanzador del instalador para invitado
 mkdir tmp/home/invitado/Desktop
