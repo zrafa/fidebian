@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=InstaladorDebian
+Comment=Instalar Debian Facultad de Informátcia
+Exec=sudo live-installer
+#Icon=/usr/share/wxMaxima/wxmaxima.png
+Terminal=false
+Type=Application
+Categories=Education;
+#MimeType=text/x-wxmaxima-batch;
