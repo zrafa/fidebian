@@ -97,7 +97,7 @@ chroot tmp dpkg-reconfigure -f noninteractive tzdata
 # instalamos software de las aulas
 chroot tmp apt-get -y install task-desktop task-mate-desktop eclipse chromium iceweasel build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
 
-chroot tmp apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak pharo fpc gnat 
+chroot tmp apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat 
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
