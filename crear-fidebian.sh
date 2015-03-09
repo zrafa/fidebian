@@ -104,7 +104,10 @@ echo "nameserver 8.8.8.8
 nameserver 8.8.4.4" > tmp/etc/resolv.conf 
 
 # falta pulseaudio ?
-# instalamos firmware binarios non free (para que funcionen principalmente los dispositivos de red)
+
+# instalamos firmware binarios free and non free (para que funcionen principalmente los dispositivos de red)
+chroot tmp apt-get -y install $(apt-cache search firmware | egrep "\-firmware|firmware\-" | awk '{print $1}' | while read line ; do echo -n $line" " ; done)
+
 # instalamos software adicional como netbeans desde unstable
 echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
 ' >> tmp/etc/apt/sources.list
