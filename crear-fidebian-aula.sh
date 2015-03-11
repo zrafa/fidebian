@@ -64,7 +64,7 @@ mount --bind /dev ${DIR}/dev
 # instalamos software de las aulas
 chroot ${DIR} apt-get -y install eclipse build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
 
-chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat 
+chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat wireshark
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
