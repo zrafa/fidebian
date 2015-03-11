@@ -49,6 +49,12 @@ Se debe borrar o mover antes de ejecutar $0"
 fi
 
 
+# Verificamos que exista base
+if [ ! -d base ] ; then 
+	echo "Error: el directorio base/ NO existe! (`pwd`). 
+Debe crear base antes de ejecutar $0"
+	exit 1
+fi
 cp -a base ${DIR}
 
 mount -t proc proc ${DIR}/proc

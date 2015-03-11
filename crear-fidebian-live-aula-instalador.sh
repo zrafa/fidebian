@@ -94,6 +94,40 @@ chroot ${DIR} apt-get clean
 # Agregamos a invitado a sudoers sin clave
 echo 'invitado    ALL=NOPASSWD: ALL' >> ${DIR}/etc/sudoers
 
+
+
+
+
+#Instalamos las dependencias del instalador live-installer de linuxmint  https://github.com/linuxmint/live-installer
+chroot ${DIR} apt-get -y install python-gtk2 python-glade2 python-webkit python-parted parted gparted python-qt4 python-opencv python-imaging imagemagick isoquery desktop-file-utils shared-mime-info sysv-rc menu gdisk iso-codes locales adduser
+# Documentacion de live-installer
+# Antes de crear el paquete debian, comentamos en /usr/lib/live-installer/installer.py la parte de remover los paquetes live, la parte de poner un face al usuario, la parge de kdm y hacemos esto en /usr/share/live-installer/slideshow :
+#  for i in * ; do cat $i | sed -e "s/ Mint//g" -e "s/Linux/GNU\/Linux/g" > /tmp/${i} ; mv /tmp/${i} $i ; done
+
+
+# Instalamos GRUB
+chroot ${DIR} apt-get -y install grub2
+
+# Instalamos el live-installer
+cp extras/live-installer_2015.02.19_all.deb ${DIR}/tmp/
+chroot ${DIR} dpkg -i /tmp/live-installer_2015.02.19_all.deb
+
+# Creamos el squashfs para el instalador
+rm ${DIR}/var/spool/bootcd/cdimage.iso 
+rm ${DIR}/lib/live/mount/medium/live/filesystem.squashfs 
+mksquashfs ${DIR}/ filesystem.squashfs
+mv filesystem.squashfs ${DIR}/lib/live/mount/medium/live/
+
+# Agregamos el icono lanzador del instalador para invitado
+mkdir ${DIR}/home/invitado/Desktop
+mkdir ${DIR}/home/invitado/Escritorio
+cp extras/instalador.desktop ${DIR}/home/invitado/Desktop
+cp extras/instalador.desktop ${DIR}/home/invitado/Escritorio
+
+
+
+
+
 # Desmontamos 
 umount ${DIR}/dev
 umount ${DIR}/sys
