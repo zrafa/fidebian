@@ -41,9 +41,6 @@ if [[ "`whoami`" != "root" ]]; then
         exit 1
 fi
 
-# Verificamos que exista debootstrap
-if ! which debootstrap ; then echo "Falta debootstrap" ; exit 1 ; fi
-
 
 if [ -d ${DIR}/ ] ; then 
 	echo "Error: el directorio ${DIR}/ existe! (`pwd`). 
