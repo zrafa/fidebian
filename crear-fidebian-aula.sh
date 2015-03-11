@@ -51,37 +51,37 @@ fi
 
 cp -a base ${DIR}
 
-mount -t proc proc tmp/proc
-mount -t sysfs sys tmp/sys
-mount --bind /dev tmp/dev
+mount -t proc proc ${DIR}/proc
+mount -t sysfs sys ${DIR}/sys
+mount --bind /dev ${DIR}/dev
 
 # instalamos software de las aulas
-chroot tmp apt-get -y install eclipse build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
+chroot ${DIR} apt-get -y install eclipse build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
 
-chroot tmp apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat 
+chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat 
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
-nameserver 8.8.4.4" > tmp/etc/resolv.conf 
+nameserver 8.8.4.4" > ${DIR}/etc/resolv.conf 
 
 # falta pulseaudio ?
 
 # instalamos software adicional como netbeans desde unstable
 echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
-' >> tmp/etc/apt/sources.list
-chroot tmp apt-get update
-chroot tmp apt-get -y install netbeans
+' >> ${DIR}/etc/apt/sources.list
+chroot ${DIR} apt-get update
+chroot ${DIR} apt-get -y install netbeans
 crear_listado_de_repos
 
 # Instalar Paquetes necesarios para cups y escaner
-chroot tmp apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
+chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
 
 
 # Quitamos los archives de paquetes bajados
-chroot tmp apt-get autoclean
+chroot ${DIR} apt-get autoclean
 
 # Desmontamos 
-umount tmp/dev
-umount tmp/sys
-umount tmp/proc
+umount ${DIR}/dev
+umount ${DIR}/sys
+umount ${DIR}/proc
 
