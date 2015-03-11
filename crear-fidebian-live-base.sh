@@ -107,7 +107,7 @@ Facultad de Informatica - Universidad Nacional del Comahue
 chroot ${DIR} bootcdwrite -s
 echo "${DIR}/var/spool/bootcd/cdimage.iso es el archivo live DVD Debian creado."
 
-# rm -rf #{DIR}
+init 6
 exit 0
 
 
