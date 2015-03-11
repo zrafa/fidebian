@@ -122,6 +122,7 @@ cp extras/live-installer_2015.02.19_all.deb ${DIR}/tmp/
 chroot ${DIR} dpkg -i /tmp/live-installer_2015.02.19_all.deb
 
 # Creamos el squashfs para el instalador
+rm filesystem.squashfs 
 rm ${DIR}/var/spool/bootcd/cdimage.iso 
 rm ${DIR}/lib/live/mount/medium/live/filesystem.squashfs 
 mksquashfs ${DIR}/ filesystem.squashfs
