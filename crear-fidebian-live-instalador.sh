@@ -31,6 +31,9 @@ if [ "$1" != "base" ] && [ "$1" != "aula" ] ; then
 fi
 DIR=live-${1}-instalador
 
+# Verificamos que exista mksquashfs
+if ! which mksquashfs ; then echo "Falta mksquashfs" ; exit 1 ; fi
+
 
 # Verificamos que haya al menos 10GB libres
 LIBRE=`df -B 1G . | tail -1 | awk '{print $4}'`
