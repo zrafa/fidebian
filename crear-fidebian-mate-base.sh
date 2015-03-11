@@ -99,7 +99,9 @@ nameserver 8.8.4.4" > ${DIR}/etc/resolv.conf
 # falta pulseaudio ?
 
 # instalamos firmware binarios free and non free (para que funcionen principalmente los dispositivos de red)
-chroot ${DIR} apt-get -y install $(apt-cache search firmware | egrep "\-firmware|firmware\-" | awk '{print $1}' | while read line ; do echo -n $line" " ; done)
+chroot ${DIR} apt-cache search firmware | egrep "\-firmware|firmware\-" | awk '{print $1}' | 
+	grep -v grub | grep -v qemu | 
+	while read paquete ; do apt-get -y install $paquete ; done
 
 # instalamos los paquetes en espaniol
 chroot ${DIR} apt-get -y install iceweasel-l10n-es-ar libreoffice-l10n-es
