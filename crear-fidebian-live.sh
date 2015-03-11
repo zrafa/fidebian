@@ -25,7 +25,7 @@ chroot ${DIR} apt-get update
 }
 
 # Verificamos que se elige una version base o del aula
-if [ "$1" != "base" ] || [ "$1" != "aula" ] ; then
+if [ "$1" != "base" ] && [ "$1" != "aula" ] ; then
 	echo "Uso : crear-fidebian-live.sh   [ base | aula ]"
 	exit 1
 fi
