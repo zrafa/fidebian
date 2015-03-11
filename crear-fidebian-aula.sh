@@ -79,6 +79,7 @@ chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-d
 
 # Quitamos los archives de paquetes bajados
 chroot ${DIR} apt-get autoclean
+chroot ${DIR} apt-get clean
 
 # Desmontamos 
 umount ${DIR}/dev

@@ -113,6 +113,7 @@ echo "LANG=es_AR.UTF-8" > ${DIR}/etc/default/locale
 
 # Quitamos los archives de paquetes bajados
 chroot ${DIR} apt-get autoclean
+chroot ${DIR} apt-get clean
 
 
 # Desmontamos 
