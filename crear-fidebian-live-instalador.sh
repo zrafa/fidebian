@@ -139,6 +139,8 @@ mkdir ${DIR}/home/invitado/Desktop
 mkdir ${DIR}/home/invitado/Escritorio
 cp extras/instalador.desktop ${DIR}/home/invitado/Desktop
 cp extras/instalador.desktop ${DIR}/home/invitado/Escritorio
+chmod a+x ${DIR}/home/invitado/Desktop/instalador.desktop
+chmod a+x ${DIR}/home/invitado/Escritorio/instalador.desktop
 
 
 

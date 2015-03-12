@@ -90,7 +90,7 @@ echo "America/Argentina/Buenos_Aires" > ${DIR}/etc/timezone
 chroot ${DIR} dpkg-reconfigure -f noninteractive tzdata
 
 # instalamos software de las aulas
-chroot ${DIR} apt-get -y install task-desktop task-mate-desktop chromium iceweasel
+chroot ${DIR} apt-get -y install task-desktop task-mate-desktop chromium iceweasel console-setup
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
