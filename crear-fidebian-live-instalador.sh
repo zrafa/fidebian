@@ -130,7 +130,7 @@ umount ${DIR}/proc
 rm filesystem.squashfs 
 rm ${DIR}/var/spool/bootcd/cdimage.iso 
 rm ${DIR}/lib/live/mount/medium/live/filesystem.squashfs 
-mkdir ${DIR}/lib/live/mount/medium/live/
+mkdir -p ${DIR}/lib/live/mount/medium/live/
 mksquashfs ${DIR}/ filesystem.squashfs
 mv filesystem.squashfs ${DIR}/lib/live/mount/medium/live/
 
