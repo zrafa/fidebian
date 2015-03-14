@@ -1,0 +1,8 @@
+[Unit]
+Description=aufs script
+
+[Service]
+ExecStart=/usr/local/bin/aufs.sh
+
+[Install]
+WantedBy=multi-user.target 
