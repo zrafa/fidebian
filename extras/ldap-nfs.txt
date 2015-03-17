@@ -1,0 +1,31 @@
+LDAP
+====
+
+Instalar las cosas como dice fede uribe
+
+Instalar los siguientes paquetes:
+# apt-get install libnss-ldap libpam-ldap nscd
+
+
+En el archivo /etc/libnss-ldap.conf :
+
+[...]
+base ou=dcc,dc=uncoma,dc=edu,dc=ar
+host 10.0.2.3
+[...]
+
+
+En el archivo /etc/nsswitch.conf colocar:
+[...]
+passwd: compat ldap
+group: compat ldap
+shadow: compat ldap
+
+Reiniciar el servicio nscd.
+
+
+NFS
+===
+
+Instalar el paquete nfs-common !!!
+
