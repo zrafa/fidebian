@@ -1,0 +1,36 @@
+
+Dificil conseguir que una imagen live creada con bootcdwrite pueda
+arrancar por red con pxe server y via nfs.
+
+Acá va el intento de documentacion.
+
+- Colocar la imagen en el pxe server.
+- Extraer de la misma el boot/initrd
+- Desarmar el initrd con :
+	gunzip initrd.gz
+	cd dir/ ; cat ../initrd | cpio -i
+- Editar dentro el script init :
+	vi init
+- Al final del script, y previo a llamar a switch_root tenemos que colocar
+  un llamado al script aufs2 que podemos guardar en el rootfs (fuera de initrd)
+	/root/usr/local/bin/aufs2.sh
+
+  (el directorio /root es donde el initrd monta el rootfs antes de llamar a
+   init)
+- Copiar el script aufs2.sh al rootfs exportado por nfs, ejemplo :
+	debian-aula/usr/local/bin/aufs2.sh
+
+- Armar de vuelta el initrd :
+	find . | cpio --create --format='newc' > ../newinitrd
+	gzip ../newinitrd
+- Copiar el nuewinitrd.gz a boot/ del pxe server
+
+- PASO FINAL IMPORTANTE : hay que deshabilitar en el rootfs exportado por nfs
+  el remount rw del / en el arranque. Teniendo systemd (es uno de estos) :
+	systemctl mask systemd-remount-fs
+	systemctl mask systemd-remount-fs.service
+	systemctl disable systemd-remount-fs
+	systemctl disable systemd-remount-fs.service
+
+
+
