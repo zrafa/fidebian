@@ -123,3 +123,4 @@ umount ${DIR}/dev
 umount ${DIR}/sys
 umount ${DIR}/proc
 
+init 6
