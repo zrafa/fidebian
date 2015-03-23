@@ -71,7 +71,7 @@ nameserver 8.8.4.4" >> ${DIR}/etc/resolv.conf
 crear_listado_de_repos
 
 # instalamos kernel, ssh server y grub
-chroot ${DIR} apt-get -y install linux-image-686-pae
+chroot ${DIR} apt-get -y install linux-image-686-pae || chroot ${DIR} apt-get -y install linux-image-amd64
 chroot ${DIR} apt-get -y install openssh-server
 
 mount -t proc proc ${DIR}/proc
