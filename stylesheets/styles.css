@@ -25,22 +25,22 @@ h1 {
 }
 
 h2 {
-  color:#393939;
+  color:#3939F;
 }
 
 h3, h4, h5, h6 {
-  color:#494949;
+  color:#4949F;
 }
 
 a {
-  color:#222;
+  color:#22A;
   font-weight:400;
   text-decoration:none;
 }
 
 a small {
   font-size:11px;
-  color:#222;
+  color:#22A;
   margin-top:-0.6em;
   display:block;
 }
