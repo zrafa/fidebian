@@ -1,6 +1,8 @@
 fidebian
 ========
 
+http://se.fi.uncoma.edu.ar/fidebian
+
 Este repositorio contiene el sistema de creación de la distribución Debian
 GNU/Linux para los laboratorios de la Facultad de Informática de la Universidad
 Nacional del Comahue.
@@ -12,7 +14,6 @@ a la planta no docente y docente.
 Objetivos :
 
  - Basado en Debian Testing. 
- - Construido utilizando debian-live (live-build : lb build)
  - Sin agregados extraños (utilizar paquetes sólo de los repositorios)
  - Que sea posible utilizarse como :
     * Distribución GNU/Linux Live.
@@ -25,8 +26,8 @@ Objetivos :
 
 * Casi nunca se rompe el apt-get update; apt-get dist-upgrade, 
   aun cuando se realice una vez al año.
-* Nunca hay que cambiar de version, Debian Testing es siempre la última
-  versión (rolling. En /etc/apt/sources.list debe decir "testing" como version)
+* Nunca hay que cambiar de version, Debian Testing es de liberación continua
+  (rolling relase. En /etc/apt/sources.list debe decir "testing" como version)
 * Tendremos la posibilidad de contar siempre con la última versión de 
   los programas, o de poder instalar programas nuevos que aparezcan.
 
