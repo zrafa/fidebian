@@ -1,0 +1,55 @@
+
+Para poder sincronizar la hora sin ntp :
+
+cd /root && date `perl get_time_from_http.pl http://www.bbc.co.uk/`
+
+Y el script perl es 
+
+
+ cat get_time_from_http.pl 
+#!/usr/bin/perl -w
+ 
+use Time::Local;
+use LWP::UserAgent;
+use Getopt::Std;
+ 
+use strict;
+ 
+my %opts = ();
+Getopt::Std::getopts( 'c', \%opts );
+ 
+my $url = shift or die( "Must provide URL to sync to" );
+ 
+my $ua = LWP::UserAgent->new();
+my $response = $ua->get( $url );
+if ( ! $response->is_success() ) {
+    die( "Failed to fetch URL: " . $response->status_line() );
+}
+ 
+my $datestr = $response->header( 'Date' );
+die( "No date found" ) if ( ! $datestr );
+ 
+sub getdatestr {
+    my ( $epoch ) = @_;
+ 
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime($epoch);
+    #my $str = sprintf( "%04d-%02d-%02d %02d:%02d:%02d", $year + 1900, $mon + 1, $mday, $hour, $min, $sec );
+    my $str = sprintf( "%02d%02d%02d%02d%04d.%02d", $mon + 1, $mday, $hour, $min, $year + 1900, $sec );
+    return( $str );
+}
+ 
+if ( $datestr =~ m{(\d+)\s+(\S+)\s+(\d{4})\s+(\d\d):(\d\d):(\d\d)(\s+(\S+))?} ) {
+    my ( $weekday, $monthstr, $year, $hour, $min, $sec ) = ( $1, $2, $3, $4, $5, $6 );
+    my ( $tzone ) = $8;
+ 
+    my %months = qw(jan 1 feb 2 mar 3 apr 4 may 5 jun 6 jul 7 aug 8 sep 9 oct 10 nov 11 dec 12);
+    my $month = $months{lc($monthstr)};
+ 
+    my $tfunc = $tzone eq "GMT" ? \&Time::Local::timegm : \&Time::Local::timelocal;
+    my $epoch = $tfunc->( $sec, $min, $hour, $weekday, $month - 1, $year );
+ 
+    printf( "%s\n", getdatestr( $epoch ) );
+} else {
+    die( "Unknown date format \"" . $datestr . "\"" );
+}
+
