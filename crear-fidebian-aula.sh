@@ -18,7 +18,7 @@ DIR=aula
 # FUNCTION : crear listado de repositorios
 function crear_listado_de_repos(){
 	
-	echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
+	echo 'deb http://10.0.17.4/debian/ testing main contrib non-free
 # deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > ${DIR}/etc/apt/sources.list
 chroot ${DIR} apt-get update
@@ -74,10 +74,20 @@ nameserver 8.8.4.4" > ${DIR}/etc/resolv.conf
 
 # instalamos software adicional como netbeans desde unstable
 echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
-' >> ${DIR}/etc/apt/sources.list
-chroot ${DIR} apt-get update
+ ' >> ${DIR}/etc/apt/sources.list
+ chroot ${DIR} apt-get update
 chroot ${DIR} apt-get -y install netbeans
 crear_listado_de_repos
+chroot ${DIR} apt-get purge netbeans
+
+if ! [[ -a netbeans-8.0.2-tar.gz ]] ; then 
+	echo "El archivo netbeans tar.gz NO EXISTE"
+	exit 1
+fi
+
+cp netbeans-8.0.2.tar.gz ${DIR}/tmp/
+cd ${DIR}/usr/ && tar xvzf ../tmp/netbeans-8.0.2.tar.gz
+cd ../../
 
 # Instalar Paquetes necesarios para cups y escaner
 chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
