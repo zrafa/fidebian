@@ -12,17 +12,28 @@
 # - Que haya espacio disponible
 # - Que el usuario sea root
 
-
-# FUNCTION : crear listado de repositorios
-function crear_listado_de_repos(){
+# FUNCTION : crear listado oficial de repositorios
+function crear_listado_oficial_de_repos(){
 	
 	echo '# deb http://10.0.17.4/debian/ testing main contrib non-free
 deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > ${DIR}/etc/apt/sources.list
 chroot ${DIR} apt-get update
 
+}
+
+
+
+# FUNCTION : crear listado de repositorios
+function crear_listado_de_repos(){
+	
+	echo 'deb http://10.0.17.4/debian/ testing main contrib non-free
+# deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+' > ${DIR}/etc/apt/sources.list
+chroot ${DIR} apt-get update
 
 }
+
 
 # Verificamos que se elige una version base o del aula
 if [ "$1" != "base" ] && [ "$1" != "aula" ] ; then
@@ -120,6 +131,9 @@ chroot ${DIR} apt-get -y install grub2
 # Instalamos el live-installer
 cp extras/live-installer_2015.02.19_all.deb ${DIR}/tmp/
 chroot ${DIR} dpkg -i /tmp/live-installer_2015.02.19_all.deb
+
+# se agrega el mirror oficial de Debian
+crear_listado_oficial_de_repos
 
 # Desmontamos 
 umount ${DIR}/dev
