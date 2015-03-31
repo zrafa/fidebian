@@ -16,8 +16,8 @@
 # FUNCTION : crear listado de repositorios
 function crear_listado_de_repos(){
 	
-	echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
-# deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+	echo '# deb http://10.0.17.4/debian/ testing main contrib non-free
+deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > ${DIR}/etc/apt/sources.list
 chroot ${DIR} apt-get update
 
@@ -73,7 +73,7 @@ echo 'invitado:$6$O0IGEAzF$EIdnVAEPX06RJiGMBEdm6IrQKvupcd63n1skNsZO8qImOyp/B2lh2
 mv ${DIR}/shadow.${DIR} ${DIR}/etc/shadow
 chmod 640 ${DIR}/etc/shadow
 
-# se agrega el mirror local de Debian
+# se agrega el mirror oficial de Debian
 crear_listado_de_repos
 
 mount -t proc proc ${DIR}/proc
@@ -130,8 +130,15 @@ umount ${DIR}/proc
 rm filesystem.squashfs 
 rm ${DIR}/var/spool/bootcd/cdimage.iso 
 rm ${DIR}/lib/live/mount/medium/live/filesystem.squashfs 
+rm ${DIR}/lib/live/mount/medium/live/borrame
 mkdir -p ${DIR}/lib/live/mount/medium/live/
-mksquashfs ${DIR}/ filesystem.squashfs
+# Este comando debajo era el original 
+# mksquashfs ${DIR}/ filesystem.squashfs
+# TODO: por favor, modificar el instalador live-installer
+#       correctamente, para no tener que crear este archivo
+#       Lo creamos para que el instalador lo encuentre simplemente
+touch ${DIR}/lib/live/mount/medium/live/borrame
+mksquashfs ${DIR}/lib/live/mount/medium/live/ filesystem.squashfs
 mv filesystem.squashfs ${DIR}/lib/live/mount/medium/live/
 
 # Agregamos el icono lanzador del instalador para invitado
@@ -155,7 +162,7 @@ Facultad de Informatica - Universidad Nacional del Comahue
 chroot ${DIR} bootcdwrite -s
 echo "${DIR}/var/spool/bootcd/cdimage.iso es el archivo live DVD Debian creado."
 
-init 6
+# init 6
 exit 0
 
 
