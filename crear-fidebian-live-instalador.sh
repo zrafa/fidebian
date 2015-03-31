@@ -126,6 +126,9 @@ umount ${DIR}/dev
 umount ${DIR}/sys
 umount ${DIR}/proc
 
+# Dejamos una marca de tiempo para identificar la distro 
+date +"%s" > ${DIR}/root/build.txt
+
 # Creamos el squashfs para el instalador
 rm filesystem.squashfs 
 rm ${DIR}/var/spool/bootcd/cdimage.iso 
