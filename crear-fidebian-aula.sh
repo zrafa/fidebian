@@ -78,9 +78,9 @@ echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
  chroot ${DIR} apt-get update
 chroot ${DIR} apt-get -y install netbeans
 crear_listado_de_repos
-chroot ${DIR} apt-get purge netbeans
+chroot ${DIR} apt-get -y purge netbeans
 
-if ! [[ -a netbeans-8.0.2-tar.gz ]] ; then 
+if ! [[ -a netbeans-8.0.2.tar.gz ]] ; then 
 	echo "El archivo netbeans tar.gz NO EXISTE"
 	exit 1
 fi
