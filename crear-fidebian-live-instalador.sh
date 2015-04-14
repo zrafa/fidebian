@@ -107,10 +107,6 @@ cp extras/login-background.svg ${DIR}/usr/share/images/desktop-base/
 # TODO: Peligrosisimo. Este workaraound es para poder desbloquear el screensaver :(
 chroot ${DIR} chmod u+s /sbin/unix_chkpwd
 
-# Quitamos los archives de paquetes bajados
-chroot ${DIR} apt-get autoclean
-chroot ${DIR} apt-get clean
-
 # Agregamos a invitado a sudoers sin clave
 echo 'invitado    ALL=NOPASSWD: ALL' >> ${DIR}/etc/sudoers
 
@@ -134,6 +130,10 @@ chroot ${DIR} dpkg -i /tmp/live-installer_2015.02.19_all.deb
 
 # se agrega el mirror oficial de Debian
 crear_listado_oficial_de_repos
+
+# Quitamos los archives de paquetes bajados
+chroot ${DIR} apt-get autoclean
+chroot ${DIR} apt-get clean
 
 # Desmontamos 
 umount ${DIR}/dev

@@ -69,6 +69,10 @@ chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim
 # Instalar Paquetes necesarios para cups y escaner
 chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
 
+# Paquetes solicitados en el FORO 
+chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish
+
+
 # Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
 nameserver 8.8.4.4" > ${DIR}/etc/resolv.conf 
@@ -81,6 +85,10 @@ echo 'deb http://ftp.us.debian.org/debian/ unstable main contrib non-free
 chroot ${DIR} apt-get update
 chroot ${DIR} apt-get -y install netbeans
 
+# Desinstalamos el netbeans original de Debian
+crear_listado_de_repos
+chroot ${DIR} apt-get -y purge netbeans
+
 if ! [[ -a netbeans-8.0.2-linux.sh ]] ; then 
 	echo "El archivo netbeans-8.0.2-linux.sh NO EXISTE"
 	exit 1
@@ -88,10 +96,6 @@ fi
 
 cp netbeans-8.0.2-linux.sh ${DIR}/tmp/
 chroot ${DIR} sh /tmp/netbeans-8.0.2-linux.sh --silent
-
-# Desinstalamos el netbeans original de Debian
-crear_listado_de_repos
-chroot ${DIR} apt-get -y purge netbeans
 
 
 # Quitamos los archives de paquetes bajados
