@@ -78,7 +78,7 @@ chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim
 chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
 
 # Paquetes solicitados en el FORO 
-chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish
+chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish imagemagick
 
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
