@@ -18,7 +18,7 @@ DIR=aula
 # FUNCTION : crear listado de repositorios
 function crear_listado_de_repos(){
 	
-	echo 'deb http://10.0.17.4/debian/ testing main contrib non-free
+	echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
 # deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > ${DIR}/etc/apt/sources.list
 chroot ${DIR} apt-get update
@@ -62,7 +62,15 @@ mount -t sysfs sys ${DIR}/sys
 mount --bind /dev ${DIR}/dev
 
 # instalamos software de las aulas
-chroot ${DIR} apt-get -y install eclipse build-essential php5 wxmaxima scilab emacs build-essential git-core bootcd
+chroot ${DIR} apt-get -y install eclipse build-essential php5 wxmaxima scilab emacs build-essential git-core 
+
+# instalamos bootcd
+chroot ${DIR} apt-get -y install bootcd
+# Quitamos de la busqueda de lectoras a los discos rigidos, y auto va al final
+grep -v CDDEV ${DIR}/etc/bootcd/bootcdwrite.conf > ${DIR}/etc/bootcd/bootcdwrite.conf.temporal
+echo 'CDDEV="/dev/sr0 /dev/sr1 auto"' >> ${DIR}/etc/bootcd/bootcdwrite.conf.temporal
+mv ${DIR}/etc/bootcd/bootcdwrite.conf.temporal ${DIR}/etc/bootcd/bootcdwrite.conf
+
 
 chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat wireshark
 
