@@ -62,7 +62,8 @@ mount -t sysfs sys ${DIR}/sys
 mount --bind /dev ${DIR}/dev
 
 # instalamos software de las aulas
-chroot ${DIR} apt-get -y install eclipse build-essential php5 wxmaxima scilab emacs build-essential git-core 
+chroot ${DIR} apt-get -y install eclipse build-essential php5 wxmaxima emacs build-essential git-core 
+# scilab
 
 # instalamos bootcd
 chroot ${DIR} apt-get -y install bootcd
@@ -72,13 +73,16 @@ echo 'CDDEV="/dev/sr0 /dev/sr1 auto"' >> ${DIR}/etc/bootcd/bootcdwrite.conf.temp
 mv ${DIR}/etc/bootcd/bootcdwrite.conf.temporal ${DIR}/etc/bootcd/bootcdwrite.conf
 
 
-chroot ${DIR} apt-get -y install ghc hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc gnat wireshark
+chroot ${DIR} apt-get -y install hugs manpages-dev phpmyadmin swi-prolog vim-gtk squeak-vm fpc
+# gnat ghc wireshark
 
 # Instalar Paquetes necesarios para cups y escaner
-chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
+# chroot ${DIR} apt-get -y install cups system-config-printer hplip sane libsane-dev sane-utils xsane
+# cups system-config-printer hplip sane libsane-dev sane-utils xsane
 
 # Paquetes solicitados en el FORO 
-chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish imagemagick
+# chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish imagemagick orca
+# lyx latexila dia texlive-lang-spanish imagemagick orca
 
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
@@ -116,3 +120,4 @@ umount ${DIR}/sys
 umount ${DIR}/proc
 
 init 6
+
