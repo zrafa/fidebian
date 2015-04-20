@@ -84,6 +84,8 @@ chroot ${DIR} apt-get -y install hugs manpages-dev phpmyadmin swi-prolog vim-gtk
 # chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish imagemagick orca
 # lyx latexila dia texlive-lang-spanish imagemagick orca
 
+# Colocamos la instalacion de las sugerencias en la distro
+cp extras/sugerencias.sh ${DIR}/usr/local/bin
 
 # Esto es un workaround : Volvemos a agregar los DNS server from google
 echo "nameserver 8.8.8.8
