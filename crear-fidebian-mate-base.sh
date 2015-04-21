@@ -17,7 +17,8 @@ DIR=base
 # FUNCTION : crear listado de repositorios
 function crear_listado_de_repos(){
 	
-	echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
+	#echo 'deb http://mirror.fi.uncoma.edu.ar/debian/ testing main contrib non-free
+	echo 'deb http://10.0.17.4/debian/ testing main contrib non-free
 # deb http://ftp.us.debian.org/debian/ testing main contrib non-free
 ' > ${DIR}/etc/apt/sources.list
 chroot ${DIR} apt-get update
@@ -52,7 +53,7 @@ Se debe borrar o mover antes de ejecutar $0"
 fi
 
 mkdir ${DIR}
-debootstrap testing ${DIR} http://mirror.fi.uncoma.edu.ar/debian/
+debootstrap testing ${DIR} http://10.0.17.4/debian/
 
 # password de root : root
 cat ${DIR}/etc/shadow | grep -v "root:" >> ${DIR}/shadow.${DIR}
@@ -98,10 +99,12 @@ nameserver 8.8.4.4" > ${DIR}/etc/resolv.conf
 
 # falta pulseaudio ?
 
+chroot ${DIR} dpkg --configure -a
+
 # instalamos firmware binarios free and non free (para que funcionen principalmente los dispositivos de red)
 chroot ${DIR} apt-cache search firmware | egrep "\-firmware|firmware\-" | awk '{print $1}' | 
 	grep -v grub | grep -v qemu | 
-	while read paquete ; do apt-get -y install $paquete ; done
+	while read paquete ; do chroot ${DIR} apt-get -y install $paquete ; done
 
 # instalamos los paquetes en espaniol
 chroot ${DIR} apt-get -y install iceweasel-l10n-es-ar libreoffice-l10n-es
@@ -123,4 +126,4 @@ umount ${DIR}/dev
 umount ${DIR}/sys
 umount ${DIR}/proc
 
-init 6
+# init 6
