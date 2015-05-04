@@ -4,9 +4,14 @@
 - Inicio normal: el sistema debe iniciar y detectar el hardware correctamente.
                  En una PC moderna no debe tardar mas de un minuto en iniciar el 
 		 Escritorio Mate.
+- El usuario live se llama "invitado". Clave "live"
+- Root : El usuario invitado puede hacer sudo su -
 - Chequear si se cuenta con conexión a internet (cableada o wireless).
 - Ejecución del Instalador
 - Instalación en Disco
 - Reinicio utilizando el disco interno
 - Instalación de sugerencias
 - /etc/apt/sources.list debe decir "testing" como distribucion
+- Verificar que el nombre de usuario/clave y el nombre de la PC son
+  los definidos durante la instalación
+- Verificar que el teclado es el seleccionado.
