@@ -81,7 +81,7 @@ chroot ${DIR} apt-get -y install hugs manpages-dev phpmyadmin swi-prolog vim-gtk
 # cups system-config-printer hplip sane libsane-dev sane-utils xsane
 
 # Paquetes solicitados en el FORO 
-# chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish imagemagick orca
+# chroot ${DIR} apt-get -y install lyx latexila dia texlive-lang-spanish imagemagick gnome-orca
 # lyx latexila dia texlive-lang-spanish imagemagick orca
 
 # Colocamos la instalacion de las sugerencias en la distro
