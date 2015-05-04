@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#useradd -d /home/invitado -c invitado -m -s /bin/bash -u 1500 -U invitado 
+# cat /etc/shadow | grep -v "invitado:" >> /tmp/shadow
+# echo 'invitado:$6$O0IGEAzF$EIdnVAEPX06RJiGMBEdm6IrQKvupcd63n1skNsZO8qImOyp/B2lh2zfuuF/2J.J9VzMyVQbCpjBc6JZp8EDPB/:16476:0:99999:7:::' >> /tmp/shadow
+# mv /tmp/shadow /etc/shadow
+# chmod 640 /etc/shadow
+
+
+
+echo 'invitado    ALL=NOPASSWD: ALL' >> /etc/sudoers
+
+# cat /etc/lightdm/lightdm.conf  | sed -e "s/.*autologin-user=.*/autologin-user=invitado/" -e "s/#autologin-user-timeout=0/autologin-user-timeout=0/" >> /tmp/lightdm.conf.bkp ; mv /tmp/lightdm.conf.bkp /etc/lightdm/lightdm.conf
+
+sh /root/netbeans-8.0.2-linux.sh --silent
+
+apt-get -y install  python-gtk2 python-glade2 python-webkit python-parted parted gparted python-qt4 python-opencv python-imaging imagemagick isoquery desktop-file-utils shared-mime-info sysv-rc menu gdisk iso-codes locales adduser
+
+dpkg -i /root/live-installer.deb

@@ -1,0 +1,1 @@
+lb config -a i386 -k 686-pae --distribution jessie  --archive-areas "main contrib non-free" --bootappend-live "boot=live config locales=es_AR.UTF-8 keyboard-layouts=es  username=invitado hostname=fidebian user-fullname=Invitado"

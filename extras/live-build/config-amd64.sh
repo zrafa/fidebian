@@ -1,0 +1,1 @@
+lb config -a amd64  --distribution stretch  --archive-areas "main contrib non-free" --bootappend-live "boot=live config locales=es_AR.UTF-8 keyboard-layouts=es  username=invitado hostname=fidebian user-fullname=Invitado"
