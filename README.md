@@ -32,6 +32,7 @@ Objetivos :
   los programas, o de poder instalar programas nuevos que aparezcan.
 
 ¿Por qué fidebian y no simplemente utilizar Debian?
+---------------------------------------------------
 
 Debian no es fácil de instalar para la comunidad general,
 por lo que le hemos agregado un sistema de instalacion grafico sencillo.
