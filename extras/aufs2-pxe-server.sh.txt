@@ -17,8 +17,13 @@ Acá va el intento de documentacion.
 
   (el directorio /root es donde el initrd monta el rootfs antes de llamar a
    init)
+
 - Copiar el script aufs2.sh al rootfs exportado por nfs, ejemplo :
 	debian-aula/usr/local/bin/aufs2.sh
+- Cambiar los permisos del script aufs2.sh a rx (ejecucion)
+- MODIFICAR el script aufs2.sh para cargar el modulo aufs.ko correcto
+  (ruta correcta)
+
 
 - Armar de vuelta el initrd :
 	find . | cpio --create --format='newc' > ../newinitrd
