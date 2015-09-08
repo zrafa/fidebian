@@ -31,6 +31,23 @@ Objetivos :
 * Tendremos la posibilidad de contar siempre con la última versión de 
   los programas, o de poder instalar programas nuevos que aparezcan.
 
+¿Por qué fidebian y no simplemente utilizar Debian?
+---------------------------------------------------
+
+Debian no es fácil de instalar para la comunidad general,
+por lo que le hemos agregado un sistema de instalacion grafico sencillo.
+
+Ademas, los laboratorios de nuestra facultad necesitan ciertas
+configuraciones especificas,
+que merecen ser trabajadas diferentes; y fueron la motivación de
+creación de esta distribución derivada de DEBIAN GNU/Linux testing.
+
+Fidebian tambien ofrece una guia de instalacion completa, una lista de correos,
+FOROs de discusión y desarrollo colaborativo.
+Para la comunidad general tambien se elaboran DVD y otros 
+medios de instalación.
+
+
 
 Sistema Base
 ------------
