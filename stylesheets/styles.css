@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
 
 body {
-  padding:50px;
+  padding:10px;
   font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#222;
   font-weight:300;
@@ -197,7 +197,7 @@ footer {
   }
   
   header {
-    padding-right:320px;
+    padding-right:120px;
   }
   
   section {
